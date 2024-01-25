@@ -1,0 +1,37 @@
+workspace = { members = ["examples/*"] }
+
+[package]
+name = "cc-taxii2-client-rs"
+version = "0.1.0"
+edition = "2021"
+authors = ["plasticuproject <plastic@plasticuproject.com>"]
+description = "Minimal CloudCover TAXII2.1 Rust client library "
+documentation = ""
+readme = "README.md"
+keywords = ["taxii", "cloudcover"]
+license = "GPL-3.0"
+repository = "https://github.com/plasticuproject/cc-taxii2-client-rs"
+rust-version = "1.74"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+ureq = { version = "2.9", features = ["json"] }
+serde = { version = "1", features = ["derive"] }
+base64 = "0.2"
+
+[lints.rust]
+unsafe_code = "forbid"
+
+[lints.clippy]
+enum_glob_use = "deny"
+pedantic = "deny"
+nursery = "deny"
+unwrap_used = "deny"
+
+[profile.release]
+opt-level = 'z'   # Optimize for size.
+lto = true        # Enable Link Time Optimisation
+codegen-units = 1 # Reduced to increase optimisations.
+panic = 'abort'   # Abort on panic
+strip = "symbols" # Strip symbols from binary
