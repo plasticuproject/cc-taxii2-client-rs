@@ -7,3 +7,4 @@ edition = "2021"
 
 [dependencies]
 cc-taxii2-client-rs = { path = "../.." }
+dotenv = "0.15"

@@ -20,6 +20,9 @@ ureq = { version = "2.9", features = ["json"] }
 serde = { version = "1", features = ["derive"] }
 base64 = "0.2"
 
+[dev-dependencies]
+dotenv = "0.15"
+
 [lints.rust]
 unsafe_code = "forbid"
 

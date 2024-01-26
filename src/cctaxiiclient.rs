@@ -257,10 +257,15 @@ impl CCTaxiiClient {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use dotenv;
+    use std::env;
 
     #[test]
     fn get_discovery_test() {
-        let agent = CCTaxiiClient::new("username", "API_key");
+        dotenv::dotenv().ok();
+        let username = env::var("TAXII_USERNAME").expect("You've not set the TAXII_USERNAME");
+        let api_key = env::var("TAXII_API_KEY").expect("You've not set the TAXII_API_KEY");
+        let agent = CCTaxiiClient::new(&username, &api_key);
         let discovery = agent.get_discovery().expect("Failed to get discovery");
 
         assert_eq!(discovery.api_roots, ["/api/"], "API roots are incorrect");
@@ -278,7 +283,10 @@ mod tests {
 
     #[test]
     fn get_collections_test() {
-        let agent = CCTaxiiClient::new("username", "API_key");
+        dotenv::dotenv().ok();
+        let username = env::var("TAXII_USERNAME").expect("You've not set the TAXII_USERNAME");
+        let api_key = env::var("TAXII_API_KEY").expect("You've not set the TAXII_API_KEY");
+        let agent = CCTaxiiClient::new(&username, &api_key);
         let collections = agent
             .get_collections("api")
             .expect("Failed to get collections");
@@ -287,7 +295,10 @@ mod tests {
 
     #[test]
     fn get_indicators_test() {
-        let agent = CCTaxiiClient::new("username", "API_key");
+        dotenv::dotenv().ok();
+        let username = env::var("TAXII_USERNAME").expect("You've not set the TAXII_USERNAME");
+        let api_key = env::var("TAXII_API_KEY").expect("You've not set the TAXII_API_KEY");
+        let agent = CCTaxiiClient::new(&username, &api_key);
         let indicators = agent
             .get_cc_indicators(None, Some(5), false, None, &None, false)
             .expect("Failed to get objects");
