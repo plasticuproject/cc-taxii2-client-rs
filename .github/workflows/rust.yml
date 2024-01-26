@@ -1,0 +1,29 @@
+name: Rust
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Lint
+      run: cargo clippy --verbose
+    - name: Build
+      run: cargo build --verbose
+    - name: Run tests
+      env:
+        TAXII_USERNAME: ${{ secrets.TAXII_USERNAME }}
+        TAXII_API_KEY: ${{ secrets.TAXII_API_KEY }}
+
+      run: cargo test --lib --verbose
+

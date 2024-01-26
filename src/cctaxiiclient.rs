@@ -32,17 +32,17 @@ use ureq::{Agent, Response};
 #[allow(dead_code)]
 #[derive(Deserialize, Debug)]
 pub struct CCIndicator {
-    created: String,
-    description: String,
-    id: String,
-    modified: String,
-    name: String,
-    pattern: String,
-    pattern_type: String,
-    pattern_version: String,
-    spec_version: String,
-    r#type: String,
-    valid_from: String,
+    pub created: String,
+    pub description: String,
+    pub id: String,
+    pub modified: String,
+    pub name: String,
+    pub pattern: String,
+    pub pattern_type: String,
+    pub pattern_version: String,
+    pub spec_version: String,
+    pub r#type: String,
+    pub valid_from: String,
 }
 
 /// Represents a `CloudCover `TAXII Envelope, used for wrapping `CloudCover `TAXII objects.

@@ -19,7 +19,7 @@ fn main() {
     }
 
     // Print availible Collections for an account.
-    match agent.get_collections(&username) {
+    match agent.get_collections("api") {
         Ok(collections) => {
             println!("collections: {:?}", collections);
         }
@@ -32,17 +32,6 @@ fn main() {
     let mut matches = HashMap::new();
     matches.insert("type", "indicator");
     match agent.get_cc_indicators(None, Some(5), false, None, &None, false) {
-        Ok(indicators) => {
-            //println!("indicators: {:?}", indicators);
-            println!("{:?}", indicators.len());
-        }
-        Err(e) => {
-            println!("Error: {:?}", e);
-        }
-    }
-
-    // Print count of all IoCs for the private account root silo.
-    match agent.get_cc_indicators(None, Some(5), true, None, &None, false) {
         Ok(indicators) => {
             //println!("indicators: {:?}", indicators);
             println!("{:?}", indicators.len());
