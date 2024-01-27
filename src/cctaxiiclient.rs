@@ -29,7 +29,6 @@ use ureq::{Agent, Response};
 /// - `spec_version`: The TAXII specification version.
 /// - `type`: The type of the `IoC` (e.g., "indicator").
 /// - `valid_from`: The date from which the `IoC` is considered valid.
-#[allow(dead_code)]
 #[derive(Deserialize, Debug)]
 pub struct CCIndicator {
     pub created: String,
@@ -55,7 +54,6 @@ pub struct CCIndicator {
 /// - `more`: Indicates if more data is available (pagination).
 /// - `next`: The URL for the next set of data, if `more` is `true`.
 /// - `objects`: A collection of TAXII objects, each represented as a `HashMap<String, String>`.
-#[allow(dead_code)]
 #[derive(Deserialize, Debug)]
 pub struct CCEnvelope {
     more: Option<bool>,
@@ -129,8 +127,10 @@ impl TaxiiClient for CCTaxiiClient {
             .map_err(|e| Box::new(JsonDeserializationError(e.to_string())))
     }
 
-    fn get_collections(&self, root: &str) -> Result<Vec<String>> {
-        let collections_endpoint = format!("{root}/collections/");
+    fn get_collections(&self, root: Option<&str>) -> Result<Vec<String>> {
+        let collections_root =
+            root.map_or_else(|| "api".to_string(), std::string::ToString::to_string);
+        let collections_endpoint = format!("{collections_root}/collections/");
         let response = self.request(&collections_endpoint)?;
         let collections: Collections = response
             .into_json()
@@ -217,8 +217,8 @@ impl CCTaxiiClient {
         let collection = match collection_id {
             Some(id) => id.to_string(),
             None => self
-                .get_collections(root)?
-                .get(0)
+                .get_collections(Some(root))?
+                .first()
                 .ok_or_else(|| {
                     Box::new(TaxiiCollectionError("No collections available".to_string()))
                 })?
@@ -288,7 +288,7 @@ mod tests {
         let api_key = env::var("TAXII_API_KEY").expect("You've not set the TAXII_API_KEY");
         let agent = CCTaxiiClient::new(&username, &api_key);
         let collections = agent
-            .get_collections("api")
+            .get_collections(Some("api"))
             .expect("Failed to get collections");
         assert_eq!(collections.len(), 1);
     }

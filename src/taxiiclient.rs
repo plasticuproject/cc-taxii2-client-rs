@@ -127,9 +127,9 @@ pub trait TaxiiClient {
     ///
     /// ```
     /// let agent = TaxiiClient::new("my_username", "my_api_key");
-    /// let collections = agent.get_collections("api");
+    /// let collections = agent.get_collections(Some("api"));
     /// ```
-    fn get_collections(&self, root: &str) -> Result<Vec<String>>;
+    fn get_collections(&self, root: Option<&str>) -> Result<Vec<String>>;
 }
 
 /// Represents a TAXII Envelope, used for wrapping TAXII objects.
@@ -142,7 +142,6 @@ pub trait TaxiiClient {
 /// - `more`: Indicates if more data is available (pagination).
 /// - `next`: The URL for the next set of data, if `more` is `true`.
 /// - `objects`: A collection of TAXII objects, each represented as a `HashMap<String, String>`.
-#[allow(dead_code)]
 #[derive(Deserialize, Debug)]
 pub struct Envelope {
     pub more: Option<bool>,
@@ -162,7 +161,6 @@ pub struct Envelope {
 /// - `default`: The default API root for this server.
 /// - `description`: A human-readable description of this server.
 /// - `title`: A human-readable title for this server.
-#[allow(dead_code)]
 #[derive(Deserialize, Debug)]
 pub struct Discovery {
     pub api_roots: Vec<String>,
@@ -187,12 +185,12 @@ pub struct Discovery {
 #[allow(dead_code)]
 #[derive(Deserialize, Debug)]
 pub struct Collection {
-    can_read: bool,
-    can_write: bool,
+    pub can_read: bool,
+    pub can_write: bool,
     pub id: String,
-    media_types: [String; 1],
-    name: String,
-    title: String,
+    pub media_types: [String; 1],
+    pub name: String,
+    pub title: String,
 }
 
 /// A container for multiple `Collection` objects.
@@ -202,7 +200,6 @@ pub struct Collection {
 /// # Fields
 ///
 /// - `collections`: A vector of `Collection` structs.
-#[allow(dead_code)]
 #[derive(Deserialize, Debug)]
 pub struct Collections {
     pub collections: Vec<Collection>,

@@ -19,7 +19,7 @@ fn main() {
     }
 
     // Print availible Collections for an account.
-    match agent.get_collections("api") {
+    match agent.get_collections(None) {
         Ok(collections) => {
             println!("collections: {:?}", collections);
         }
@@ -34,6 +34,9 @@ fn main() {
     match agent.get_cc_indicators(None, Some(5), false, None, &None, false) {
         Ok(indicators) => {
             //println!("indicators: {:?}", indicators);
+            for i in indicators.iter() {
+                println!("{:?}", i);
+            }
             println!("{:?}", indicators.len());
         }
         Err(e) => {

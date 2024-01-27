@@ -1,4 +1,4 @@
-name: Rust
+name: Lint Build Deploy
 
 on:
   push:
@@ -11,7 +11,7 @@ env:
 
 jobs:
   build:
-    environment: rust
+    environment: Testing
     runs-on: ubuntu-latest
 
     steps:
@@ -19,7 +19,7 @@ jobs:
     - name: Lint
       run: cargo clippy --verbose
     - name: Build
-      run: cargo build --verbose
+      run: cargo build --release --verbose
     - name: Run tests
       env:
         TAXII_USERNAME: ${{ secrets.TAXII_USERNAME }}
