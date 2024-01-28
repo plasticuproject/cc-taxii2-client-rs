@@ -1,4 +1,4 @@
-workspace = { members = ["examples/*"] }
+workspace = { members = ["examples/*", "tests/*"] }
 
 [package]
 name = "cc-taxii2-client-rs"
@@ -6,9 +6,9 @@ version = "0.1.0"
 edition = "2021"
 authors = ["plasticuproject <plastic@plasticuproject.com>"]
 description = "Minimal CloudCover TAXII2.1 Rust client library "
-documentation = ""
+documentation = "https://docs.rs/cc-taxii2-client.rs"
 readme = "README.md"
-keywords = ["taxii", "cloudcover"]
+keywords = ["taxii", "taxii2.1", "cloudcover"]
 license = "GPL-3.0"
 repository = "https://github.com/plasticuproject/cc-taxii2-client-rs"
 rust-version = "1.74"
@@ -22,6 +22,10 @@ base64 = "0.2"
 
 [dev-dependencies]
 dotenv = "0.15"
+version-sync = "0.9"
+
+[badges.maintenance]
+status = "actively-developed"
 
 [lints.rust]
 unsafe_code = "forbid"
