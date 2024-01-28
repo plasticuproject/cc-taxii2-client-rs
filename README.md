@@ -4,6 +4,6 @@
 [![Docs](https://docs.rs/cc-taxii2-client-rs/badge.svg)](https://docs.rs/cc-taxii2-client-rs)
 [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
 
-WIP.
+# cc-taxii2-client-rs
+## Minimal CloudCover TAXII2.1 Rust client library.
 
-Don't roast me too hard.

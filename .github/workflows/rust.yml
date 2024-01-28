@@ -14,12 +14,12 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Lint
-      run: cargo clippy --verbose
+      run: cargo clippy --workspace --verbose
     - name: Test
       env:
         TAXII_USERNAME: ${{ secrets.TAXII_USERNAME }}
         TAXII_API_KEY: ${{ secrets.TAXII_API_KEY }}
-      run: cargo test --all-features --release --lib --tests --verbose
+      run: cargo test --release --tests --workspace --verbose
 
   build:
     environment: Testing
