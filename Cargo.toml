@@ -2,13 +2,13 @@ workspace = { members = ["examples/*", "tests/*"] }
 
 [package]
 name = "cc-taxii2-client-rs"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 authors = ["plasticuproject <plastic@plasticuproject.com>"]
 description = "Minimal CloudCover TAXII2.1 Rust client library "
 documentation = "https://docs.rs/cc-taxii2-client.rs"
 readme = "README.md"
-keywords = ["taxii", "taxii2.1", "cloudcover"]
+keywords = ["taxii", "taxii2", "cloudcover"]
 license = "GPL-3.0"
 repository = "https://github.com/plasticuproject/cc-taxii2-client-rs"
 rust-version = "1.74"
